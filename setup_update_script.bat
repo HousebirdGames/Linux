@@ -29,10 +29,10 @@ if errorlevel 1 (
 :add_to_profile
 set /p confirm="Do you want to add the script to .bash_profile? (Y/n): "
 if /i "!confirm!"=="n" goto ssh_connect
-echo Adding the script to .bash_profile...
-ssh %USERNAME%@%SERVER_IP% "echo '/home/%USERNAME%/update_script.sh' >> ~/.bash_profile"
+echo Updating .bash_profile...
+ssh %USERNAME%@%SERVER_IP% "sed -i '/update_script.sh/d' ~/.bash_profile && echo '/home/%USERNAME%/update_script.sh' >> ~/.bash_profile"
 if errorlevel 1 (
-    echo Failed to add the script to .bash_profile. Please check your connection and try again.
+    echo Failed to update .bash_profile. Please check your connection and try again.
     goto end
 )
 
